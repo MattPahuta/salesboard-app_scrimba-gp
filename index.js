@@ -6,12 +6,12 @@ let achievementsBadge = ''
 let achievementsBadgeTwo = false
 let totalRevenue = 0
 let totalCommission = 0
-let productA = {
+const productA = {
     emoji: "⭐",
     revenue: 200,
     commission: 50
 }
-let productB = {
+const productB = {
     emoji: "🔥",
     revenue: 300,
     commission: 75
