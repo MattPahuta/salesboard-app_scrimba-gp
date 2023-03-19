@@ -91,7 +91,7 @@ function checkAchievements() {
 
 // Render salesData 
 function renderSales() {
-    // *** Moved all these variable from global scope to with render function (local scope)
+    // *** Moved these six variable here from global scope since we only need to access them from within this function
     // *** Alternatively, we could remove the consts altogether and apply salesData to the individual document selectors
     // *** for example: document.getElementById('sales-header').textContent = timesClicked 
     // *** I'm good with either format - Matt
