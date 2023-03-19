@@ -1,5 +1,4 @@
 // Salesboard App
-
 let totalSales = ''
 let timesClicked = 0 
 let achievementsUnlocked = 0 
@@ -8,17 +7,6 @@ let achievementsBadgeTwo = false
 let totalRevenue = 0
 let totalCommission = 0
 
-// let salesData = {
-//     timesClicked: 0, // live sales counter
-//     totalSales: '',
-//     achievementsUnlocked: 0, // achievments counter
-//     achievmentsBadge: '',
-//     achievementsBadgeTwo: false,
-//     totalRevenue: 0,
-//     totalCommission: 0,  
-// }
-
-// Products Data/Products Available
 const productA = {
     emoji: "⭐",
     revenue: 200,
@@ -29,6 +17,14 @@ const productB = {
     revenue: 300,
     commission: 75
 }
+
+// Light and dark mode switch
+const toggleBtn = document.querySelector('.toggle-mode')
+toggleBtn.addEventListener('click', function () {
+    document.body.classList.toggle('light')
+    toggleBtn.classList.toggle('fa-moon')
+    toggleBtn.classList.toggle('fa-sun')
+})
 
 // Fetch sales data from local storage (if available)
 function fetchSalesData() {
@@ -75,9 +71,8 @@ function resetSalesData() {
 
 }
 
-
 // Setup
-// Some interaction: the sales buttons
+// The sales buttons
 const paBtn = document.getElementById('btn-productA')
 const pbBtn = document.getElementById('btn-productB')
 
@@ -89,18 +84,14 @@ const pbBtn = document.getElementById('btn-productB')
 paBtn.addEventListener('click', function () { fixSale(productA) })
 pbBtn.addEventListener('click', function () { fixSale(productB) })
 
+// ** Moved 6x consts for DOM updates into renderSales func (Matt)
+
 // initally they're empty (need to refactor this when we're using local storage)
 // salesBar.textContent = achievementsBar.textContent = '' // May not need this - Matt
 
 
 
 // *** Sales Calculations
-// Clicking the sales buttons will:
-// 1. update totalSales array with sales
-// 2. update "Live Sales" in the HTML with the content of the totalSales array
-// 3. update "Live Sales" with times either of the two buttons is clicked
-// 4. update totalRevenue and totalCommission with values set in respective product arrays
-// 5. update totalRevenue and totalCommission in the HTML with the content of their arrays
 function fixSale(salesProduct) {
 
     // update these variables in salesData object instead of global variables - Matt
@@ -121,27 +112,17 @@ function fixSale(salesProduct) {
 }
 
 // Calculate achievements
-// The achievements are given on three occasions:
-// 1. With first sale (when timesClicked === 1)
-// 2. When revenue reaches $2500 (when totalRevenue >= 2500) - beware: this should ONLY happen once only when this goal is reached. Boolean to set?
-// 3. With the 15th sale (when timesClicked === 15)
-// First and third goal are easy, second goal has more to it.
-// I like to make this happen with just one variable but in first iteration I'll use a boolean which switches when goal is met
 function checkAchievements() {
     if (timesClicked === 1) {
         achievementsUnlocked += 1
         achievementsBadge += '🔔'
-        console.log(achievementsBadge) // check
     } else if (totalRevenue >= 2500 && achievementsBadgeTwo === false) {
         achievementsUnlocked += 1
         achievementsBadge += '💰'
         achievementsBadgeTwo = true
-        console.log(achievementsBadgeTwo) // check
-        console.log(achievementsBadge) // check
     } else if (timesClicked === 15) {
         achievementsUnlocked += 1
         achievementsBadge += '🏆'
-        console.log(achievementsBadge) // check
     }
 }
 
@@ -160,7 +141,6 @@ function renderSales() {
     fetchSalesData()
 
 
-
     salesHeader.textContent = `Live Sales - ${timesClicked}`
     salesBar.textContent = totalSales
     achievementsHeader.textContent = `Live Achievements - ${achievementsUnlocked}`
@@ -170,16 +150,5 @@ function renderSales() {
 }
 
 
-
-
-
-//Light and dark mode event listener
-const toggleBtn = document.querySelector('.toggle-mode')
-toggleBtn.addEventListener('click', function() {
-    document.body.classList.toggle("light")
-    toggleBtn.classList.toggle("fa-moon")
-    toggleBtn.classList.toggle("fa-sun")
-})
-
-
 renderSales()
+
