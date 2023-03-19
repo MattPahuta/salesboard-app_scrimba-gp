@@ -1,12 +1,13 @@
-// Salesboard App
-let totalSales = ''
-let timesClicked = 0 
-let achievementsUnlocked = 0 
-let achievementsBadge = ''
-let achievementsBadgeTwo = false
-let totalRevenue = 0
-let totalCommission = 0
+// *** Salesboard App ***
 
+// Global variables and data structures
+const salesData = fetchSalesData(); // initialize sales data structure 
+const toggleBtn = document.querySelector('.toggle-mode') // Light and dark mode switch
+const paBtn = document.getElementById('btn-productA') // prod A sale button element
+const pbBtn = document.getElementById('btn-productB') // prod B sale button element
+const resetBtn = document.getElementById('btn-reset') // reset data button element
+
+// Available products:
 const productA = {
     emoji: "⭐",
     revenue: 200,
@@ -18,94 +19,56 @@ const productB = {
     commission: 75
 }
 
-// Light and dark mode switch
-const toggleBtn = document.querySelector('.toggle-mode')
-toggleBtn.addEventListener('click', function () {
-    document.body.classList.toggle('light')
-    toggleBtn.classList.toggle('fa-moon')
-    toggleBtn.classList.toggle('fa-sun')
-})
-
-// Fetch sales data from local storage (if available)
-function fetchSalesData() {
-    let salesData;
-    if (localStorage.getItem('salesData')) { // if there is saved sales data available 
-        salesData = JSON.parse(localStorage.getItem('salesData')); // get the saved sales data
-    } else {  // get the initial sales data from global variables
-        salesData = {
-            timesClicked: timesClicked, // live sales counter
-            totalSales: totalSales,
-            achievementsUnlocked: achievementsUnlocked, // achievments counter
-            achievmentsBadge: achievementsBadge,
-            achievementsBadgeTwo: achievementsBadgeTwo,
-            totalRevenue: totalRevenue,
-            totalCommission: totalCommission,
-        }
-        localStorage.setItem('salesData', JSON.stringify(salesData));
-    }
-
-}
-
-
-// Store sales data in local storage
-// Or, updateSalesData (in local storage) ?
-// accept args for salesData?
-// this function only gets called if there is a salesData object available in local storage
-function updateSalesData() {
-    let salesData = {
-        timesClicked: timesClicked, // live sales counter
-        totalSales: totalSales,
-        achievementsUnlocked: achievementsUnlocked, // achievments counter
-        achievmentsBadge: achievementsBadge,
-        achievementsBadgeTwo: achievementsBadgeTwo,
-        totalRevenue: totalRevenue,
-        totalCommission: totalCommission,
-    }
-
-    localStorage.setItem('salesData', JSON.stringify(salesData));
-
-}
-
-// Reset saved sales data
-function resetSalesData() {
-
-}
-
-// Setup
-// The sales buttons
-const paBtn = document.getElementById('btn-productA')
-const pbBtn = document.getElementById('btn-productB')
-
-// Show the correct emoji on those sales buttons (Do we need this? Emoji content hardcoded in html - Matt)
+// *** We have these emojis hardcoded in the html, so I don't believe these assignments are necessary - Matt
+// Show the correct emoji on those sales buttons
 // paBtn.textContent = productA.emoji
 // pbBtn.textContent = productB.emoji
 
-// Let them listen for clicks & when they're hit fire a sales function
-paBtn.addEventListener('click', function () { fixSale(productA) })
-pbBtn.addEventListener('click', function () { fixSale(productB) })
+// Fetch sales data from local storage (if available)
+function fetchSalesData() {
+    if (localStorage.getItem('salesData')) { // if there is saved sales data available 
+        return JSON.parse(localStorage.getItem('salesData')); // return the saved sales data
+    } else { // otherwise
+       return { // return an object with these starting values:
+            totalSales: '',
+            timesClicked: 0,
+            achievementsUnlocked: 0,
+            achievementsBadge: '',
+            achievementsBadgeTwo: false,
+            totalRevenue: 0,
+            totalCommission: 0,
+        }
+    }
+}
 
-// ** Moved 6x consts for DOM updates into renderSales func (Matt)
+// Store sales data in local storage
+function updateSalesData() {
+    localStorage.setItem('salesData', JSON.stringify(salesData));
+}
 
-// initally they're empty (need to refactor this when we're using local storage)
-// salesBar.textContent = achievementsBar.textContent = '' // May not need this - Matt
+// Reset saved sales data values
+function resetSalesData() {
+    salesData.totalSales = '';
+    salesData.timesClicked = 0;
+    salesData.achievementsUnlocked = 0;
+    salesData.achievementsBadge = '';
+    salesData.achievementsBadgeTwo = false;
+    salesData.totalRevenue = 0;
+    salesData.totalCommission = 0;
+    updateSalesData(); // update the saved sales data in local storage
+    renderSales(); // render updated data
+}
 
 
+// *** Moved 6 const variables for DOM updates into renderSales func - Matt
 
 // *** Sales Calculations
 function fixSale(salesProduct) {
-
-    // update these variables in salesData object instead of global variables - Matt
-    totalSales += salesProduct.emoji
-    totalRevenue += salesProduct.revenue
-    totalCommission += salesProduct.commission
-    timesClicked += 1
-
-    console.log('Times Clicked: ', timesClicked)
-    console.log('Total Sales: ', totalSales)
-    console.log('Total Revenue: ', totalRevenue)
-    console.log('Total Commission: ', totalCommission)
-
-
+    // changed to update these variables in salesData local storage object instead of previous global variables - Matt
+    salesData.totalSales += salesProduct.emoji
+    salesData.totalRevenue += salesProduct.revenue
+    salesData.totalCommission += salesProduct.commission
+    salesData.timesClicked += 1
     checkAchievements()
     updateSalesData() // update sales data in local storage - Matt
     renderSales()
@@ -113,22 +76,25 @@ function fixSale(salesProduct) {
 
 // Calculate achievements
 function checkAchievements() {
-    if (timesClicked === 1) {
-        achievementsUnlocked += 1
-        achievementsBadge += '🔔'
-    } else if (totalRevenue >= 2500 && achievementsBadgeTwo === false) {
-        achievementsUnlocked += 1
-        achievementsBadge += '💰'
-        achievementsBadgeTwo = true
-    } else if (timesClicked === 15) {
-        achievementsUnlocked += 1
-        achievementsBadge += '🏆'
+    if (salesData.timesClicked === 1) {
+        salesData.achievementsUnlocked += 1
+        salesData.achievementsBadge += '🔔'
+    } else if (salesData.totalRevenue >= 2500 && salesData.achievementsBadgeTwo === false) {
+        salesData.achievementsUnlocked += 1
+        salesData.achievementsBadge += '💰'
+        salesData.achievementsBadgeTwo = true
+    } else if (salesData.timesClicked === 15) {
+        salesData.achievementsUnlocked += 1
+        salesData.achievementsBadge += '🏆'
     }
 }
 
 // Render salesData 
 function renderSales() {
-    // Moved all these variable from global scope to with render function (local scope) - Matt
+    // *** Moved all these variable from global scope to with render function (local scope)
+    // *** Alternatively, we could remove the consts altogether and apply salesData to the individual document selectors
+    // *** for example: document.getElementById('sales-header').textContent = timesClicked 
+    // *** I'm good with either format - Matt
     const salesHeader = document.getElementById('sales-header')
     const salesBar = document.getElementById('sales-bar')
     const achievementsHeader = document.getElementById('achievements-header')
@@ -136,19 +102,28 @@ function renderSales() {
     const revenueBar = document.getElementById('revenue-bar')
     const commissionBar = document.getElementById('commission-bar')
 
-    // pull salesData object before render - Matt
-    // salesData = JSON.parse(localStorage.getItem('salesData'));
-    fetchSalesData()
+    // *** destructure salesData object
+    const { timesClicked, totalSales, achievementsUnlocked, achievementsBadge, totalRevenue, totalCommission } = salesData;
 
+    salesHeader.textContent = timesClicked;
+    salesBar.textContent = totalSales;
+    achievementsHeader.textContent = achievementsUnlocked;
+    achievementsBar.textContent = achievementsBadge;
+    revenueBar.textContent = totalRevenue;
+    commissionBar.textContent = totalCommission;
 
-    salesHeader.textContent = `Live Sales - ${timesClicked}`
-    salesBar.textContent = totalSales
-    achievementsHeader.textContent = `Live Achievements - ${achievementsUnlocked}`
-    achievementsBar.textContent = achievementsBadge
-    revenueBar.textContent = `$ ${totalRevenue}`
-    commissionBar.textContent = `$ ${totalCommission}`
 }
 
+// Event listeners
+paBtn.addEventListener('click', function () { fixSale(productA) })
+pbBtn.addEventListener('click', function () { fixSale(productB) })
+resetBtn.addEventListener('click', resetSalesData) // call resetSalesData func when reset btn is clicked
+
+toggleBtn.addEventListener('click', function () { // toggle light/dark mode listener
+    document.body.classList.toggle('light')
+    toggleBtn.classList.toggle('fa-moon')
+    toggleBtn.classList.toggle('fa-sun')
+})
 
 renderSales()
 

@@ -46,6 +46,14 @@ button:active {
     scale: 0.98;
 }
 
+/* Added styles for reset button - Matt */
+button#btn-reset {
+    margin-top: 2.25rem;
+    color: #FBFBFB;
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+
 i.fa-solid {
     position: absolute;
     top: 2.5rem;
