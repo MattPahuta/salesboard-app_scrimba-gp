@@ -48,9 +48,9 @@ button:active {
 
 /* Added styles for reset button - Matt */
 button#btn-reset {
-    margin-top: 2.25rem;
+    margin-top: 3rem;
     color: #FBFBFB;
-    font-size: 1.875rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 
