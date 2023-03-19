@@ -1,14 +1,22 @@
 // Salesboard App
 
 let totalSales = ''
-let timesClicked = 0 // 
+let timesClicked = 0 
 let achievementsUnlocked = 0 
 let achievementsBadge = ''
 let achievementsBadgeTwo = false
 let totalRevenue = 0
 let totalCommission = 0
 
-let salesData = {}
+// let salesData = {
+//     timesClicked: 0, // live sales counter
+//     totalSales: '',
+//     achievementsUnlocked: 0, // achievments counter
+//     achievmentsBadge: '',
+//     achievementsBadgeTwo: false,
+//     totalRevenue: 0,
+//     totalCommission: 0,  
+// }
 
 // Products Data/Products Available
 const productA = {
@@ -24,38 +32,41 @@ const productB = {
 
 // Fetch sales data from local storage (if available)
 function fetchSalesData() {
+    let salesData;
     if (localStorage.getItem('salesData')) { // if there is saved sales data available 
         salesData = JSON.parse(localStorage.getItem('salesData')); // get the saved sales data
-    } else {
+    } else {  // get the initial sales data from global variables
         salesData = {
-            timesClicked: 0, // live sales counter
-            totalSales: '',
-            achievementsUnlocked: 0, // achievments counter
-            achievmentsBadge: '',
-            achievementsBadgeTwo: false,
-            totalRevenue: 0,
-            totalCommission: 0,
+            timesClicked: timesClicked, // live sales counter
+            totalSales: totalSales,
+            achievementsUnlocked: achievementsUnlocked, // achievments counter
+            achievmentsBadge: achievementsBadge,
+            achievementsBadgeTwo: achievementsBadgeTwo,
+            totalRevenue: totalRevenue,
+            totalCommission: totalCommission,
         }
         localStorage.setItem('salesData', JSON.stringify(salesData));
     }
 
 }
 
+
 // Store sales data in local storage
-function storeSalesData() {
-    const salesData = {
-        timesClicked: 0, // live sales counter
-        totalSales: '',
-        achievementsUnlocked: 0, // achievments counter
-        achievmentsBadge: '',
-        achievementsBadgeTwo: false,
-        totalRevenue: 0,
-        totalCommission: 0,
+// Or, updateSalesData (in local storage) ?
+// accept args for salesData?
+// this function only gets called if there is a salesData object available in local storage
+function updateSalesData() {
+    let salesData = {
+        timesClicked: timesClicked, // live sales counter
+        totalSales: totalSales,
+        achievementsUnlocked: achievementsUnlocked, // achievments counter
+        achievmentsBadge: achievementsBadge,
+        achievementsBadgeTwo: achievementsBadgeTwo,
+        totalRevenue: totalRevenue,
+        totalCommission: totalCommission,
     }
 
     localStorage.setItem('salesData', JSON.stringify(salesData));
-
-    fetchSalesData();
 
 }
 
@@ -63,8 +74,6 @@ function storeSalesData() {
 function resetSalesData() {
 
 }
-
-
 
 
 // Setup
@@ -80,14 +89,10 @@ const pbBtn = document.getElementById('btn-productB')
 paBtn.addEventListener('click', function () { fixSale(productA) })
 pbBtn.addEventListener('click', function () { fixSale(productB) })
 
-
-
 // initally they're empty (need to refactor this when we're using local storage)
 // salesBar.textContent = achievementsBar.textContent = '' // May not need this - Matt
 
 
-
-renderSales()
 
 // *** Sales Calculations
 // Clicking the sales buttons will:
@@ -98,6 +103,7 @@ renderSales()
 // 5. update totalRevenue and totalCommission in the HTML with the content of their arrays
 function fixSale(salesProduct) {
 
+    // update these variables in salesData object instead of global variables - Matt
     totalSales += salesProduct.emoji
     totalRevenue += salesProduct.revenue
     totalCommission += salesProduct.commission
@@ -108,8 +114,35 @@ function fixSale(salesProduct) {
     console.log('Total Revenue: ', totalRevenue)
     console.log('Total Commission: ', totalCommission)
 
+
     checkAchievements()
+    updateSalesData() // update sales data in local storage - Matt
     renderSales()
+}
+
+// Calculate achievements
+// The achievements are given on three occasions:
+// 1. With first sale (when timesClicked === 1)
+// 2. When revenue reaches $2500 (when totalRevenue >= 2500) - beware: this should ONLY happen once only when this goal is reached. Boolean to set?
+// 3. With the 15th sale (when timesClicked === 15)
+// First and third goal are easy, second goal has more to it.
+// I like to make this happen with just one variable but in first iteration I'll use a boolean which switches when goal is met
+function checkAchievements() {
+    if (timesClicked === 1) {
+        achievementsUnlocked += 1
+        achievementsBadge += '🔔'
+        console.log(achievementsBadge) // check
+    } else if (totalRevenue >= 2500 && achievementsBadgeTwo === false) {
+        achievementsUnlocked += 1
+        achievementsBadge += '💰'
+        achievementsBadgeTwo = true
+        console.log(achievementsBadgeTwo) // check
+        console.log(achievementsBadge) // check
+    } else if (timesClicked === 15) {
+        achievementsUnlocked += 1
+        achievementsBadge += '🏆'
+        console.log(achievementsBadge) // check
+    }
 }
 
 // Render salesData 
@@ -137,30 +170,7 @@ function renderSales() {
 }
 
 
-// Calculate achievements
-// The achievements are given on three occasions:
-// 1. With first sale (when timesClicked === 1)
-// 2. When revenue reaches $2500 (when totalRevenue >= 2500) - beware: this should ONLY happen once only when this goal is reached. Boolean to set?
-// 3. With the 15th sale (when timesClicked === 15)
-// First and third goal are easy, second goal has more to it.
-// I like to make this happen with just one variable but in first iteration I'll use a boolean which switches when goal is met
-function checkAchievements() {
-    if (timesClicked === 1) {
-        achievementsUnlocked += 1
-        achievementsBadge += '🔔'
-        console.log(achievementsBadge) // check
-    } else if (totalRevenue >= 2500 && achievementsBadgeTwo === false) {
-        achievementsUnlocked += 1
-        achievementsBadge += '💰'
-        achievementsBadgeTwo = true
-        console.log(achievementsBadgeTwo) // check
-        console.log(achievementsBadge) // check
-    } else if (timesClicked === 15) {
-        achievementsUnlocked += 1
-        achievementsBadge += '🏆'
-        console.log(achievementsBadge) // check
-    }
-}
+
 
 
 //Light and dark mode event listener
@@ -170,3 +180,6 @@ toggleBtn.addEventListener('click', function() {
     toggleBtn.classList.toggle("fa-moon")
     toggleBtn.classList.toggle("fa-sun")
 })
+
+
+renderSales()
