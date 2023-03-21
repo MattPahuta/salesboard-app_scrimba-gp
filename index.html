@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesboard App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script
+      src="https://kit.fontawesome.com/00433d45e7.js"
+      crossorigin="anonymous"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salesboard App</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="index.css" />
-  <script src="https://kit.fontawesome.com/00433d45e7.js" crossorigin="anonymous"></script>
-</head>
+  <body>
+    <div class="salesboard">
+      <h1>Salesboard 🔔</h1>
+      <i class="fa-solid fa-sun toggle-mode"></i>
+      <img src="images/picture.jpg" alt="Sales representative">
 
-<body>
-  <div class="salesboard">
-    <h1>Salesboard 🔔</h1>
-    <i class="fa-solid fa-sun toggle-mode"></i>
-    <img src="images/picture.jpg" alt="Picture of a man" />
+      <div class="product-btn-container">
+        <button id="btn-productA"></button>
+        <button id="btn-productB"></button>
+      </div>
 
-    <div class="product-btn-container">
-      <button id="btn-productA">⭐</button>
-      <button id="btn-productB">🔥</button>
-    </div><!--product-btn-container-->
+      <div class="sales-container">
+        <h3>Live Sales - <span id="sales-header"></span></h3>
+        <div class="sales-bar bar" id="sales-bar"></div>
+      </div>
 
-    <div class="sales-container">
-      <!-- *** update to target only the dynamically updating element (counter span) - Matt -->
-      <h3>Live Sales - <span id="sales-header"></span></h3>
-      <div class="sales-bar bar" id="sales-bar"></div><!--sales-bar-->
-    </div><!--sales-container-->
+      <div class="achievements-container">
+        <h3>Live Achievements - <span id="achievements-header"></span></h3>
+        <div class="achievements-bar bar" id="achievements-bar"></div>
+      </div>
 
-    <div class="achievements-container">
-      <!-- *** update to target only the dynamically updating element (counter span) - Matt -->
-      <h3>Live Achievements - <span id="achievements-header"></span></h3>
-      <div class="achievements-bar bar" id="achievements-bar"></div><!--achievements-bar-->
-    </div><!--achievements-container-->
+      <div class="revenue-container">
+        <div class="total-revenue">
+          <h3>Total Revenue</h3>
+          <div class="revenue-bar bar" id="revenue-bar"></div>
+        </div>
 
-    <div class="revenue-container">
-      <div class="total-revenue">
-        <h3>Total Revenue</h3>
-        <div class="revenue-bar bar" id="revenue-bar"></div><!--revenue-bar-->
-      </div><!--total-revenue-->
+        <div class="total-commission">
+          <h3>Total Commission</h3>
+          <div class="commission-bar bar" id="commission-bar"></div>
+        </div>
+      </div>
 
-      <div class="total-commission">
-        <h3>Total Commission</h3>
-        <div class="commission-bar bar" id="commission-bar"></div><!--commission-bar-->
-      </div><!--total-commission-->
-    </div><!--revenue-container-->
-
-    <button id="btn-reset">Reset Data</button>
-
-  </div><!--salesboard-->
-
-  <script src="index.js"></script>
-</body>
-
+      <button id="btn-reset">Reset Data</button>
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>
