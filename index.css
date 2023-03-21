@@ -12,20 +12,20 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif; 
-    color: #FBFBFB;
-    background: #201A23;
-} 
+    font-family: 'Poppins', sans-serif;
+    color: #fbfbfb;
+    background: #201a23;
+}
 
 .salesboard {
-   text-align: center;
-   max-width: 58.75rem;
-   margin: 0 auto;
-   padding: 0 2rem 2rem;
+    text-align: center;
+    max-width: 58.75rem;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
 }
 
 img {
-    border: 0.625rem solid #44354A;
+    border: 0.625rem solid #44354a;
     border-radius: 50%;
     width: 13.75rem;
     margin-bottom: 1.5rem;
@@ -33,7 +33,7 @@ img {
 
 /*Buttons*/
 button {
-    background: #9E4770;
+    background: #9e4770;
     height: 5rem;
     width: 11.875rem;
     font-size: 2.812rem;
@@ -46,6 +46,14 @@ button:active {
     scale: 0.98;
 }
 
+/* Added styles for reset button - Matt */
+button#btn-reset {
+    margin-top: 3rem;
+    color: #fbfbfb;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 i.fa-solid {
     position: absolute;
     top: 2.5rem;
@@ -54,8 +62,8 @@ i.fa-solid {
     line-height: 1.4;
     width: 2rem;
     height: 2rem;
-    background: #44354A;
-    color: #FBFBFB;
+    background: #44354a;
+    color: #fbfbfb;
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
@@ -73,7 +81,7 @@ h3 {
 
 /*Containers*/
 .bar {
-    background: #44354A;
+    background: #44354a;
     border-radius: 2.5rem;
     font-size: 2rem;
     line-height: 3.5rem;
@@ -106,27 +114,26 @@ h3 {
     font-size: 2.5rem;
 }
 
-
 /*Light mode*/
-body, 
+body,
 img,
 button,
 .bar,
 i.fa-solid {
-    transition: background-color 0.5s, color 0.5s, border 0.5s; 
+    transition: background-color 0.5s, color 0.5s, border 0.5s;
 }
 
 body.light {
     background: #bfafc6;
-    color: #44354A;
+    color: #44354a;
 }
 
 body.light img {
-    border: .625rem solid #977ca4;
+    border: 0.625rem solid #977ca4;
 }
 
 body.light button {
-    background: #B86089;
+    background: #b86089;
 }
 
 body.light .bar {
@@ -135,6 +142,6 @@ body.light .bar {
 }
 
 body.light i.fa-solid {
-    color: #44354A;
+    color: #44354a;
     background: #977ca4;
 }
