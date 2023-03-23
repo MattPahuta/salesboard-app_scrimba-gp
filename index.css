@@ -8,8 +8,6 @@ COLOR: #9E4770
 
 */
 
-
-
 body {
     margin: 0;
     padding: 0;
@@ -68,14 +66,14 @@ i.fa-solid {
 }
 
 /*Headings*/
-h1{
+h1 {
     font-size: 3rem;
     margin-top: 0;
 }
 
 h3 {
     font-size: 1.5rem;
-    margin-bottom: .3125rem;
+    margin-bottom: 0.3125rem;
 }
 
 /*Containers*/
@@ -90,7 +88,7 @@ h3 {
 #sales-bar,
 #achievements-bar {
     text-align: left;
-    padding: .3125rem 1.5rem;
+    padding: 0.3125rem 1.5rem;
 }
 
 .product-btn-container,
