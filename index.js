@@ -112,6 +112,12 @@ function render() {
   document.getElementById("commission-bar").textContent = totalCommission;
 }
 
+function toggleMode() {
+  document.body.classList.toggle("light");
+  toggleBtn.classList.toggle("fa-moon");
+  toggleBtn.classList.toggle("fa-sun");
+}
+
 // Event listeners
 
 salesboard.addEventListener("click", function (e) {
@@ -121,20 +127,8 @@ salesboard.addEventListener("click", function (e) {
     fixSale(productB);
   } else if (e.target.id === "btn-reset") {
     resetSalesData();
-  } else if (e.target.id === "toggle") document.body.classList.toggle("light");
-  toggleBtn.classList.toggle("fa-moon");
-  toggleBtn.classList.toggle("fa-sun");
-});
-
-//paBtn.addEventListener('click', function () { fixSale(productA) })
-//pbBtn.addEventListener('click', function () { fixSale(productB) })
-//document.getElementById('btn-reset').addEventListener('click', resetSalesData) // call resetSalesData func when reset btn is clicked
-
-/*toggleBtn.addEventListener("click", function () {
-  // toggle light/dark mode listener
-  document.body.classList.toggle("light");
-  toggleBtn.classList.toggle("fa-moon");
-  toggleBtn.classList.toggle("fa-sun");
-});*/
+  } else if (e.target.id === "toggle") {
+    toggleMode();
+}});
 
 render();
