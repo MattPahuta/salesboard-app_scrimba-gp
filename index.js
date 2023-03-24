@@ -61,7 +61,7 @@ function resetSalesData() {
 // Sales Calculations
 function fixSale(salesProduct) {
   // changed to update these variables in salesData local storage object instead of previous global variables - Matt
-  salesData.totalSales += `${salesProduct.emoji} `;
+  salesData.totalSales += salesProduct.emoji;
   salesData.totalRevenue += salesProduct.revenue;
   salesData.totalCommission += salesProduct.commission;
   salesData.timesClicked += 1;
