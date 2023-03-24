@@ -127,7 +127,8 @@ salesboard.addEventListener("click", function (e) {
     fixSale(productB);
   } else if (e.target.id === "btn-reset") {
     resetSalesData();
-  } else if (e.target.id === "toggle") toggleMode();
-});
+  } else if (e.target.id === "toggle") {
+    toggleMode();
+}});
 
 render();
