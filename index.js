@@ -129,6 +129,7 @@ salesboard.addEventListener("click", function (e) {
     resetSalesData();
   } else if (e.target.id === "toggle") {
     toggleMode();
-}});
+  }
+});
 
 render();
