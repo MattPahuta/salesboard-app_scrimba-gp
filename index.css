@@ -156,10 +156,13 @@ body.light button {
 
 body.light .bar {
     background: #977ca4;
-    /*background: #a791b1;*/
 }
 
 body.light i.fa-solid {
     color: #44354a;
     background: #977ca4;
+}
+
+body.light button#btn-reset {
+    color: #44354a;
 }
