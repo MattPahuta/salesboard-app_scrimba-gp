@@ -8,6 +8,11 @@ COLOR: #9E4770
 
 */
 
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -36,6 +41,7 @@ button {
     background: #9e4770;
     height: 5rem;
     width: 11.875rem;
+    font-family: inherit;
     font-size: 2.812rem;
     border: 0;
     border-radius: 0.625rem;
@@ -55,9 +61,6 @@ button#btn-reset {
 }
 
 i.fa-solid {
-    position: absolute;
-    top: 2.5rem;
-    right: 15rem;
     font-size: 1.5rem;
     line-height: 1.4;
     width: 2rem;
@@ -67,10 +70,12 @@ i.fa-solid {
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
+    place-self: center end;
 }
 
 /*Headings*/
 h1 {
+    margin: 0;
     font-size: 3rem;
 }
 
@@ -80,6 +85,12 @@ h3 {
 }
 
 /*Containers*/
+header {
+    padding: 2.5rem 0;
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+}
+
 .bar {
     background: #44354a;
     border-radius: 2.5rem;
