@@ -29,6 +29,7 @@ body {
     padding: 0 2rem 2rem;
 }
 
+
 img {
     border: 0.625rem solid #44354a;
     border-radius: 50%;
@@ -77,6 +78,7 @@ i.fa-solid {
 h1 {
     margin: 0;
     font-size: 3rem;
+    margin-top: 0;
 }
 
 h3 {
@@ -150,10 +152,13 @@ body.light button {
 
 body.light .bar {
     background: #977ca4;
-    /*background: #a791b1;*/
 }
 
 body.light i.fa-solid {
     color: #44354a;
     background: #977ca4;
+}
+
+body.light button#btn-reset {
+    color: #44354a;
 }
