@@ -8,6 +8,11 @@ COLOR: #9E4770
 
 */
 
+html {
+    font-size: 100%;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -41,6 +46,7 @@ button {
     background: #9e4770;
     height: 5rem;
     width: 11.875rem;
+    font-family: inherit;
     font-size: 2.812rem;
     border: 0;
     border-radius: 0.625rem;
@@ -69,12 +75,12 @@ i.fa-solid {
     padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
-    align-self: end;
-    margin-top: 1rem;
+    place-self: center end;
 }
 
 /*Headings*/
 h1 {
+    margin: 0;
     font-size: 3rem;
     margin-top: 0;
 }
@@ -85,12 +91,19 @@ h3 {
 }
 
 /*Containers*/
+header {
+    padding: 2.5rem 0;
+    display: grid;
+    grid-template-columns: 10% 1fr 10%;
+}
+
 .bar {
     background: #44354a;
     border-radius: 2.5rem;
     font-size: 2rem;
     line-height: 3.5rem;
     min-height: 3.5rem;
+    overflow-wrap: break-word;
 }
 
 #sales-bar,
