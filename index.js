@@ -1,7 +1,8 @@
 // *** Salesboard App ***
 
-let salesData = fetchSalesData(); // initialize sales data structure
 const toggleBtn = document.querySelector(".toggle-mode"); // Light and dark mode switch
+let salesData = fetchSalesData(); // initialize sales data structure
+let lightMode = localStorage.getItem('lightMode');
 
 // Available products:
 const productA = {
@@ -103,31 +104,31 @@ function render() {
     document.getElementById("commission-bar").textContent = totalCommission;
 }
 
-// handle light/dark mode theme in local storage
-let darkMode = localStorage.getItem('darkMode');
-if (darkMode === "enabled") {
-    enableDarkMode();
+// check if dark mode enabled
+if (lightMode === "enabled") {
+    enableLightMode();
 }
 
-function enableDarkMode() {
-    document.body.classList.remove("light");
-    localStorage.setItem("darkMode", "enabled");
-    toggleBtn.classList.remove("fa-sun");
-    toggleBtn.classList.add("fa-moon");
-}
-
-function disableDarkMode() {
+// functions to handle dark/light mode switching
+function enableLightMode() {
     document.body.classList.add("light");
-    localStorage.setItem("darkMode", null)
-    toggleBtn.classList.remove("fa-moon");
+    localStorage.setItem("lightMode", "enabled");
     toggleBtn.classList.add("fa-sun");
+    toggleBtn.classList.remove("fa-moon");
+}
+
+function disableLightMode() {
+    document.body.classList.remove("light");
+    localStorage.setItem("lightMode", null)
+    toggleBtn.classList.add("fa-moon");
+    toggleBtn.classList.remove("fa-sun");
 }
 
 function getTheme() {
-    if (darkMode !== "enabled") {
-        enableDarkMode();
+    if (lightMode !== "enabled") {
+        enableLightMode();
     } else {
-        disableDarkMode();
+        disableLightMode();
     }
 }
 
