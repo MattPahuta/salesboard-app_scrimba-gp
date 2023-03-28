@@ -1,6 +1,6 @@
 // *** Salesboard App ***
 
-const toggleBtn = document.getElementById("toggle-theme"); // Light and dark mode switch
+const toggleBtn = document.getElementById("toggle-theme"); // Light/dark mode switch
 let salesData = fetchSalesData(); // initialize sales data structure
 
 // Available products:
@@ -29,7 +29,14 @@ function fetchSalesData() {
             timesClicked: 0,
             achievementsUnlocked: 0,
             achievementsBadge: "",
-            achievementsBadgeTwo: false,
+            achievements: { 
+                bell: false,
+                moneyBag: false,
+                trophy: false,
+                melonParty: false,
+                danceExperience: false,
+                waffleParty: false,
+            },
             totalRevenue: 0,
             totalCommission: 0,
         };
@@ -41,15 +48,9 @@ function updateSalesData() {
     localStorage.setItem("salesData", JSON.stringify(salesData));
 }
 
-// Reset saved sales data values
 function resetSalesData() {
-    salesData.totalSales = "";
-    salesData.timesClicked = 0;
-    salesData.achievementsUnlocked = 0;
-    salesData.achievementsBadge = "";
-    salesData.achievementsBadgeTwo = false;
-    salesData.totalRevenue = 0;
-    salesData.totalCommission = 0;
+    localStorage.removeItem('salesData');
+    salesData = fetchSalesData();
     updateSalesData(); // update the saved sales data in local storage
     render(); // render updated data 
 }
@@ -70,16 +71,27 @@ function checkAchievements() {
     if (salesData.timesClicked === 1) {
         salesData.achievementsUnlocked += 1;
         salesData.achievementsBadge += "🔔";
-    } else if (
-        salesData.totalRevenue >= 2500 &&
-        salesData.achievementsBadgeTwo === false
-    ) {
+        salesData.achievements.bell = true;
+    } else if (salesData.totalRevenue >= 2500 && salesData.achievements.moneyBag === false) {
         salesData.achievementsUnlocked += 1;
         salesData.achievementsBadge += "💰";
-        salesData.achievementsBadgeTwo = true;
+        salesData.achievements.moneyBag = true;
     } else if (salesData.timesClicked === 15) {
         salesData.achievementsUnlocked += 1;
         salesData.achievementsBadge += "🏆";
+        salesData.achievements.trophy = true;
+    } else if (salesData.totalRevenue >= 7500 && salesData.achievements.melonParty === false) {
+        salesData.achievementsUnlocked += 1;
+        salesData.achievementsBadge += "🍈";
+        salesData.achievements.melonParty = true;
+    } else if (salesData.timesClicked >= 30 && salesData.totalRevenue >= 10000 && salesData.achievements.danceExperience === false) {
+        salesData.achievementsUnlocked += 1;
+        salesData.achievementsBadge += "💃🪩🕺";
+        salesData.achievements.danceExperience = true;
+    } else if (salesData.timesClicked >= 50 && salesData.totalRevenue >= 15000 && salesData.achievements.waffleParty === false) {
+        salesData.achievementsUnlocked += 1;
+        salesData.achievementsBadge += "🧇😳🧇";
+        salesData.achievements.waffleParty = true;
     }
 }
 
