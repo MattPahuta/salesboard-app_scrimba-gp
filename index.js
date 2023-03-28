@@ -95,6 +95,23 @@ function checkAchievements() {
     }
 }
 
+// get random avatar image
+function getRandomAvatar() {
+    const avatar = document.getElementById("avatar");
+    const avatars = [ 
+        { src: "./images/dylan.jpg", alt: "Dylan from Severance"},
+        { src: "./images/helly.jpg", alt: "Helly from Severance"},
+        { src: "./images/irving.jpg", alt: "Irving from Severance"},
+        { src: "./images/mark.png", alt: "Mark from Severance"}, ]
+    const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)]
+    
+    avatar.setAttribute("src", randomAvatar.src)
+    avatar.setAttribute("alt", randomAvatar.alt)
+
+}
+
+getRandomAvatar();
+
 // Render content to page
 function render() {
     // destructure salesData object
