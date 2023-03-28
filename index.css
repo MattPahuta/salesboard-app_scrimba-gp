@@ -33,7 +33,10 @@ body {
 img {
     border: 0.625rem solid #44354a;
     border-radius: 50%;
-    width: 13.75rem;
+    width: 100%;
+    max-width: 13.75rem;
+    max-height: 1375rem;
+    object-fit: cover;
     margin-bottom: 1.5rem;
 }
 
