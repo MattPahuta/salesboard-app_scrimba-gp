@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,53 +8,59 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <script
-        src="https://kit.fontawesome.com/00433d45e7.js"
-        crossorigin="anonymous"></script>
-</head>
+      src="https://kit.fontawesome.com/00433d45e7.js"
+      crossorigin="anonymous"></script>
+  </head>
 
-<body>
+  <body class="light">
     <div class="salesboard" id="salesboard">
-        <header>
-            <div class="spacer"></div>
-            <h1>Salesboard 🔔</h1>
-            <i class="fa-solid fa-sun toggle-mode" id="toggle"></i>
-        </header>
+      <header>
+        <div class="spacer"></div>
+        <h1>Salesboard 🔔</h1>
+        <i class="fa-solid fa-sun toggle-mode" id="toggle-theme"></i>
+      </header>
 
-        <img src="images/picture.jpg" alt="Sales representative">
-        <!-- Product buttons -->
-        <div class="product-btn-container">
-            <button id="btn-productA"></button>
-            <button id="btn-productB"></button>
+      <img src="images/picture.jpg" alt="Sales representative" />
+      <!-- Product buttons -->
+      <div class="product-btn-container">
+        <button id="btn-productA"></button>
+        <button id="btn-productB"></button>
+      </div>
+      <!-- Live sales -->
+      <div class="sales-container">
+        <h3>
+          Live Sales -
+          <span id="sales-header"></span>
+        </h3>
+        <div class="sales-bar bar" id="sales-bar"></div>
+      </div>
+      <!-- Achievements -->
+      <div class="achievements-container">
+        <h3>
+          Live Achievements -
+          <span id="achievements-header"></span>
+        </h3>
+        <div class="achievements-bar bar" id="achievements-bar"></div>
+      </div>
+      <!-- Revenue/Commission -->
+      <div class="revenue-container">
+        <div class="total-revenue">
+          <h3>Total Revenue</h3>
+          <div class="revenue-bar bar" id="revenue-bar"></div>
         </div>
-        <!-- Live sales -->
-        <div class="sales-container">
-            <h3>Live Sales - <span id="sales-header"></span></h3>
-            <div class="sales-bar bar" id="sales-bar"></div>
+        <div class="total-commission">
+          <h3>Total Commission</h3>
+          <div class="commission-bar bar" id="commission-bar"></div>
         </div>
-        <!-- Achievements -->
-        <div class="achievements-container">
-            <h3>Live Achievements - <span id="achievements-header"></span></h3>
-            <div class="achievements-bar bar" id="achievements-bar"></div>
-        </div>
-        <!-- Revenue/Commission -->
-        <div class="revenue-container">
-            <div class="total-revenue">
-                <h3>Total Revenue</h3>
-                <div class="revenue-bar bar" id="revenue-bar"></div>
-            </div>
-            <div class="total-commission">
-                <h3>Total Commission</h3>
-                <div class="commission-bar bar" id="commission-bar"></div>
-            </div>
-        </div>
+      </div>
 
-        <button id="btn-reset">Reset Data</button>
+      <button id="btn-reset">Reset Data</button>
     </div>
 
-<script src="index.js"></script>
-</body>
+    <script src="index.js"></script>
+  </body>
 </html>
